@@ -4,26 +4,30 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import org.logart.shared.Appointment;
 
+import java.util.List;
+
 /**
  * @author Artem Loginov(ALohinov@luxoft.com)
  * @since 4/22/14 8:33 PM
  */
 public class AppointmentPresenter implements Presenter {
-	Appointment appointment;
 	Display view;
+	private List<Appointment> appointments;
 
 	public interface Display {
-		public void clear();
+		void clear();
 
-		public void setDescription(String description);
+		void setDescription(String description);
 
-		public Widget asWidget();
+		Widget asWidget();
 
-		public void setPresenter(AppointmentPresenter presenter);
+		void setPresenter(AppointmentPresenter presenter);
+
+		void setData(List<Appointment> model);
 	}
 
-	public AppointmentPresenter(Appointment appointment, Display view) {
-		this.appointment = appointment;
+	public AppointmentPresenter(List<Appointment> appointments, Display view) {
+		this.appointments = appointments;
 		this.view = view;
 
 		bind();//todo find more beautiful way;
@@ -33,7 +37,8 @@ public class AppointmentPresenter implements Presenter {
 	public void bind() {
 		view.setPresenter(this);
 		view.clear();
-		view.setDescription(appointment.getDescription());
+
+		view.setData(appointments);
 	}
 
 	@Override
@@ -41,7 +46,9 @@ public class AppointmentPresenter implements Presenter {
 		panel.add(view.asWidget());
 	}
 
-	public void showDateTime() {
-		view.setDescription(appointment.getDescription() + " at " + appointment.getTime());
+	@Override
+	public void addAppointment(Appointment appointment) {
+		appointments.add(appointment);
+		bind();
 	}
 }

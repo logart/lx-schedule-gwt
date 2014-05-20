@@ -1,38 +1,49 @@
 package org.logart.shared;
 
-import com.google.gwt.i18n.shared.DateTimeFormat;
-import org.joda.time.DateTime;
+import java.util.Date;
 
 /**
  * @author Artem Loginov(ALohinov@luxoft.com)
  * @since 4/22/14 8:23 PM
  */
 public class Appointment {
-	private String description;
-	private DateTimeFormat time;
+	private final Date startDate;
+	private final Date endDate;
 
-	public Appointment() {
+	private final String description;
 
+	private final PERIOD period;
+
+	public Appointment(Date startDate, Date endDate, String description, PERIOD period) {
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.description = description;
+		this.period = period;
 	}
 
-	public Appointment(String description, DateTimeFormat time) {
-		this.description = description;
-		this.time = time;
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
 	}
 
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public PERIOD getPeriod() {
+		return period;
 	}
 
-	public DateTimeFormat getTime() {
-		return time;
-	}
-
-	public void setTime(DateTimeFormat time) {
-		this.time = time;
+	@Override
+	public String toString() {
+		return "Appointment{" +
+				"startDate=" + startDate +
+				", endDate=" + endDate +
+				", description='" + description + '\'' +
+				", period=" + period +
+				'}';
 	}
 }

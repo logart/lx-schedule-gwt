@@ -1,57 +1,27 @@
 package org.logart.client;
 
-import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import org.logart.client.presenters.AppointmentPresenter;
 import org.logart.client.presenters.Presenter;
 import org.logart.client.views.AppointmentView;
 import org.logart.shared.Appointment;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class Schedule implements EntryPoint {
 
-	private final VerticalPanel mainPanel = new VerticalPanel();
-	private final FlexTable appointmentFlexTable = new FlexTable();
-	private final HorizontalPanel addPanel = new HorizontalPanel();
-	private final TextBox newAppointmentTextBox = new TextBox();
-	private final Button addAppointmentButton = new Button("Add");
-	private final Label lastUpdatedLabel = new Label();
-	/**
-	 * The message displayed to the user when the server cannot be reached or
-	 * returns an error.
-	 */
-	private static final String SERVER_ERROR = "An error occurred while "
-			+ "attempting to contact the server. Please check your network "
-			+ "connection and try again.";
-
-	/**
-	 * Create a remote service proxy to talk to the server-side Greeting service.
-	 */
-	private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-	private List<Appointment> appointments = new ArrayList<Appointment>();
-
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
 
-		Appointment first = new Appointment();
-
 		AppointmentPresenter.Display view = new AppointmentView();
 
-		Presenter presenter = new AppointmentPresenter(first, view);
+		Presenter presenter = new AppointmentPresenter(new ArrayList<Appointment>(), view);
 		presenter.go(RootPanel.get());
 
 //		appointmentFlexTable.setText(0,0,"Time");
@@ -187,16 +157,5 @@ public class Schedule implements EntryPoint {
 //		MyHandler handler = new MyHandler();
 //		sendButton.addClickHandler(handler);
 //		nameField.addKeyUpHandler(handler);
-	}
-
-	private void addAppointment() {
-//		final Appointment appointment = new Appointment(newAppointmentTextBox.getText().trim());
-//		newAppointmentTextBox.setFocus(true);
-//		newAppointmentTextBox.setText("");
-//
-//		if(appointments.contains(appointment)){
-//			return;
-//		}
-//		appointments.add()
 	}
 }
